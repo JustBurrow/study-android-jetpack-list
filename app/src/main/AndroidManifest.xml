@@ -18,8 +18,14 @@
             android:theme="@style/Theme.List">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".app.activity.LazyColumnActivity"
+            android:exported="false"
+            android:label="@string/activity_lazy_column_title"
+            android:theme="@style/Theme.List" />
     </application>
 </manifest>
