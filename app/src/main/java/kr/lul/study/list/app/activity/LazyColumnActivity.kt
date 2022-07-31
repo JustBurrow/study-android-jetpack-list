@@ -14,7 +14,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -50,17 +49,16 @@ fun LazyColumnActivityLayout(
     initContents: List<Data> = listOf(),
     viewModel: LazyColumnViewModel = viewModel()
 ) {
-    val context = LocalContext.current
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(),
-        contentPadding = PaddingValues(3.dp)
+        contentPadding = PaddingValues(3.dp)    // 아이템 목록과 컨테이너 사이의 여백. 자식 UI(아이템. 이경우엔 `DataCard`) 사이의 여백이 아니다.
     ) {
         val items = initContents.ifEmpty { viewModel.load() }
         Log.v(TAG, "#layout : items=$items")
-        items(items) { item ->
-            DataCard(item)
+        items(items) {
+            DataCard(it)
         }
     }
 }
