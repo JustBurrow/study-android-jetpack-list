@@ -8,12 +8,13 @@ import kr.lul.study.list.model.DataModel
 import javax.inject.Inject
 
 @HiltViewModel
-class InfiniteScrollViewModel @Inject constructor(
-    private val dataModel: DataModel
-) : ViewModel() {
+class InfiniteScrollViewModel @Inject constructor() : ViewModel() {
     companion object {
         val TAG = InfiniteScrollViewModel::class.simpleName
     }
+
+    @Inject
+    lateinit var dataModel: DataModel
 
     fun load(): List<Data> {
         val list = dataModel.load(0L)
