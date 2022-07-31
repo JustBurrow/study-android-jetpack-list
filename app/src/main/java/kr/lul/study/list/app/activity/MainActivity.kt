@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -54,6 +52,16 @@ fun MainActivityLayout() {
         }) {
             Text(
                 text = context.getString(R.string.main_nav_target_label_lazy_column),
+                fontSize = 34.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = {
+            context.startActivity(Intent(context, InfiniteScrollActivity::class.java))
+        }) {
+            Text(
+                text = context.getString(R.string.main_nav_target_infinite_scroll),
                 fontSize = 34.sp,
                 fontWeight = FontWeight.Bold
             )

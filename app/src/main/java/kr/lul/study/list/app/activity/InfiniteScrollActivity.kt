@@ -18,16 +18,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kr.lul.study.list.app.activity.LazyColumnActivity.Companion.TAG
+import kr.lul.study.list.app.activity.InfiniteScrollActivity.Companion.TAG
 import kr.lul.study.list.app.ui.component.DataCard
 import kr.lul.study.list.app.ui.theme.ListTheme
 import kr.lul.study.list.domain.Data
-import kr.lul.study.list.viewmodel.LazyColumnViewModel
+import kr.lul.study.list.viewmodel.InfiniteScrollViewModel
 
 @AndroidEntryPoint
-class LazyColumnActivity : ComponentActivity() {
+class InfiniteScrollActivity : ComponentActivity() {
     companion object {
-        val TAG = LazyColumnActivity::class.simpleName
+        val TAG = InfiniteScrollActivity::class.simpleName
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class LazyColumnActivity : ComponentActivity() {
         setContent {
             ListTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    LazyColumnActivityLayout()
+                    InfiniteScrollActivityLayout()
                 }
             }
         }
@@ -45,15 +45,15 @@ class LazyColumnActivity : ComponentActivity() {
 }
 
 @Composable
-fun LazyColumnActivityLayout(
+fun InfiniteScrollActivityLayout(
     initContents: List<Data> = listOf(),
-    viewModel: LazyColumnViewModel = viewModel()
+    viewModel: InfiniteScrollViewModel = viewModel()
 ) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(),
-        contentPadding = PaddingValues(3.dp)    // 아이템 목록과 컨테이너 사이의 여백. 자식 UI(아이템. 이경우엔 `DataCard`) 사이의 여백이 아니다.
+        contentPadding = PaddingValues(3.dp)
     ) {
         val items = initContents.ifEmpty { viewModel.load() }
         Log.v(TAG, "#layout : items=$items")
@@ -65,8 +65,8 @@ fun LazyColumnActivityLayout(
 
 @Preview(showBackground = true)
 @Composable
-fun LazyColumnActivityPreview() {
+fun InfiniteScrollActivityPreview() {
     ListTheme {
-        LazyColumnActivityLayout(DUMMY_DATA)
+        InfiniteScrollActivityLayout(DUMMY_DATA)
     }
 }

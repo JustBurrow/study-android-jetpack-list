@@ -27,5 +27,10 @@
             android:exported="false"
             android:label="@string/activity_lazy_column_title"
             android:theme="@style/Theme.List" />
+        <activity
+            android:name=".app.activity.InfiniteScrollActivity"
+            android:exported="false"
+            android:label="@string/activity_infinite_scroll_title"
+            android:theme="@style/Theme.List" />
     </application>
 </manifest>
