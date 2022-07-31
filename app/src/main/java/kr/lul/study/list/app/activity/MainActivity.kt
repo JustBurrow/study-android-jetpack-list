@@ -11,8 +11,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kr.lul.study.list.app.ui.theme.ListTheme
+import kr.lul.study.list.viewmodel.MainViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,7 +38,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
 }
 
 @Composable
-fun MainLayout() {
+fun MainLayout(vm: MainViewModel = viewModel()) {
     Text(text = "Hello!")
 }
 
