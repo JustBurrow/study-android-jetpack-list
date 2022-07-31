@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Study : List</string>
+
+    <string name="activity_lazy_column_title">LazyColumn</string>
+
+    <string name="main_nav_target_label_lazy_column">LazyColumn</string>
 </resources>

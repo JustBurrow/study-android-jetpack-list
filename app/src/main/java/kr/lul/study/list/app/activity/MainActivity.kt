@@ -1,17 +1,27 @@
 package kr.lul.study.list.app.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dagger.hilt.android.AndroidEntryPoint
+import kr.lul.study.list.R
 import kr.lul.study.list.app.ui.theme.ListTheme
 import javax.inject.Inject
 
@@ -28,7 +38,7 @@ class MainActivity @Inject constructor() : ComponentActivity() {
         setContent {
             ListTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
-                    MainLayout()
+                    MainActivityLayout()
                 }
             }
         }
@@ -36,14 +46,25 @@ class MainActivity @Inject constructor() : ComponentActivity() {
 }
 
 @Composable
-fun MainLayout() {
-    Text(text = "Hello!")
+fun MainActivityLayout() {
+    val context = LocalContext.current
+    Column(modifier = Modifier.padding(12.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+        Button(onClick = {
+            context.startActivity(Intent(context, LazyColumnActivity::class.java))
+        }) {
+            Text(
+                text = context.getString(R.string.main_nav_target_label_lazy_column),
+                fontSize = 34.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun MainActivityPreview() {
     ListTheme {
-        MainLayout()
+        MainActivityLayout()
     }
 }
