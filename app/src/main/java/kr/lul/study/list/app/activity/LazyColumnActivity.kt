@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
@@ -52,18 +55,8 @@ fun LazyColumnActivityLayout(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(),
-        contentPadding = PaddingValues(6.dp)
+        contentPadding = PaddingValues(3.dp)
     ) {
-        item {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(6.dp)
-            ) {
-            }
-        }
-
         val items = initContents.ifEmpty { viewModel.load() }
         Log.v(TAG, "#layout : items=$items")
         items(items) { item ->

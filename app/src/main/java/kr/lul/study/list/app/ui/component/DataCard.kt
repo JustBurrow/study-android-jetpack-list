@@ -1,10 +1,8 @@
 package kr.lul.study.list.app.ui.component
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -29,8 +27,9 @@ fun DataCard(data: Data) {
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .padding(3.dp)
-            .border(border = BorderStroke(1.dp, Color.LightGray), shape = RoundedCornerShape(8.dp))
+            .padding(3.dp),
+        shape = MaterialTheme.shapes.medium,
+        elevation = 6.dp
     ) {
         Column(
             modifier = Modifier
