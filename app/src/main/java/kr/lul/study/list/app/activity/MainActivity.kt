@@ -63,7 +63,7 @@ fun MainActivityLayout() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun MainActivityPreview() {
     ListTheme {
         MainActivityLayout()
     }
