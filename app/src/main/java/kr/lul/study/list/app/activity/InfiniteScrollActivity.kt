@@ -48,7 +48,7 @@ class InfiniteScrollActivity : ComponentActivity() {
 
 @Composable
 fun InfiniteScrollActivityLayout(
-    initContents: List<Data> = listOf(),
+    dummyList: List<Data>? = null,
     viewModel: InfiniteScrollViewModel = viewModel()
 ) {
     val listState = rememberLazyListState()
@@ -59,7 +59,10 @@ fun InfiniteScrollActivityLayout(
         contentPadding = PaddingValues(3.dp),
         state = listState
     ) {
-        val items = initContents.ifEmpty { viewModel.load() }
+        val items = dummyList ?: viewModel.list
+        if (items.isEmpty()) {
+            viewModel.load()
+        }
         Log.v(TAG, "#layout : items=$items")
         items(items) {
             DataCard(it)
