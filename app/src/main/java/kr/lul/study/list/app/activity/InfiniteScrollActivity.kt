@@ -52,6 +52,8 @@ fun InfiniteScrollActivityLayout(
     viewModel: InfiniteScrollViewModel = viewModel()
 ) {
     val listState = rememberLazyListState()
+    val items = dummyList ?: viewModel.list
+
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -59,10 +61,10 @@ fun InfiniteScrollActivityLayout(
         contentPadding = PaddingValues(3.dp),
         state = listState
     ) {
-        val items = dummyList ?: viewModel.list
         if (items.isEmpty()) {
             viewModel.load()
         }
+
         Log.v(TAG, "#layout : items=$items")
         items(items) {
             DataCard(it)
@@ -70,8 +72,9 @@ fun InfiniteScrollActivityLayout(
     }
 
     listState.OnBottomReached {
-        Log.v(TAG, "#onBottomReached")
+        Log.v(TAG, "#onBottomReached fetch next.")
         viewModel.load()
+        Log.v(TAG, "#onBottomReached : items=$items")
     }
 }
 
@@ -81,7 +84,7 @@ fun InfiniteScrollActivityLayout(
  */
 @Composable
 fun LazyListState.OnBottomReached(
-    loadMore: () -> Unit
+    listener: () -> Unit
 ) {
     /**
      * 다음 데이터를 로딩해야 하는지 판단.
@@ -89,7 +92,9 @@ fun LazyListState.OnBottomReached(
     val shouldLoadMore = remember {
         derivedStateOf {
             val lastVisible = layoutInfo.visibleItemsInfo.lastOrNull()
-                ?: return@derivedStateOf true
+            Log.v(TAG, "#derivedStateOf : totalCount=${layoutInfo.totalItemsCount}, lastVisible=${lastVisible?.index}")
+
+            lastVisible ?: return@derivedStateOf true
             lastVisible.index == layoutInfo.totalItemsCount - 1
         }
     }
@@ -99,7 +104,7 @@ fun LazyListState.OnBottomReached(
         snapshotFlow { shouldLoadMore.value }
             .collect {
                 if (it) { // 다음 로딩 상태가 `true`가 되면
-                    loadMore() // 새 데이터 로딩.
+                    listener() // 새 데이터 로딩.
                 }
             }
     }

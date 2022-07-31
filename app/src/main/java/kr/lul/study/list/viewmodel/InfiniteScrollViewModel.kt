@@ -16,15 +16,15 @@ class InfiniteScrollViewModel @Inject constructor() : ViewModel() {
         val TAG = InfiniteScrollViewModel::class.simpleName
     }
 
-    var list by mutableStateOf(mutableListOf<Data>())
+    var list by mutableStateOf(listOf<Data>())
         private set
 
     @Inject
     lateinit var dataModel: DataModel
 
     fun load(): List<Data> {
-        val list = dataModel.load(0L)
-        this.list.addAll(list)
+        val list = dataModel.load(this.list.size.toLong())
+        this.list = this.list + list
         Log.v(TAG, "#load return : $list")
         return list
     }
